@@ -7,9 +7,10 @@
 # The release workflow (.github/workflows/release-antchat.yml) emits a
 # GitHub Release tagged `antchat-v<version>` with two binary tarballs and
 # a SHA256SUMS file. After tagging, the tap formula's `url` and `sha256`
-# fields below are bumped to the new release.
+# fields below are bumped to the new release. Until the first real
+# release lands, the sha256 entries are placeholders — see PLACEHOLDER.
 #
-# Install:
+# Install (after tap exists + first release published):
 #   brew tap jktfe/antchat
 #   brew install antchat
 #
@@ -18,17 +19,17 @@
 class Antchat < Formula
   desc "Lightweight ANT chat client — single binary, no Bun/Node required on host"
   homepage "https://github.com/Jktfe/a-nice-terminal"
-  version "1.0.0"
+  version "1.1.1"
   license "MIT"
 
   on_macos do
     on_arm do
       url "https://github.com/Jktfe/a-nice-terminal/releases/download/antchat-v#{version}/antchat-#{version}-darwin-arm64.tar.gz"
-      sha256 "9641f6a2eb1ad43adf4bb7bab0d7176916a458fc733decdabe93bc08f3984af0"
+      sha256 "7f9e62b94abd4c1b70754b070fc1a70b57a4d445d40bfc82a0f0771ea0494710"
     end
     on_intel do
       url "https://github.com/Jktfe/a-nice-terminal/releases/download/antchat-v#{version}/antchat-#{version}-darwin-x64.tar.gz"
-      sha256 "e1aa2554eb7c7d255bc832c73a18fd288029d572e39905884fa009470b2607ff"
+      sha256 "de12b12b6e4f1d8f245246c0fb044a1e6ce349a484dbe1b76a4809b8e5a988cd"
     end
   end
 
