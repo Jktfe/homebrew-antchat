@@ -18,17 +18,17 @@
 class Antchat < Formula
   desc "Lightweight ANT chat client — single binary, no Bun/Node required on host"
   homepage "https://github.com/Jktfe/a-nice-terminal"
-  version "0.3.0-alpha.2"
+  version "1.0.0"
   license "MIT"
 
   on_macos do
     on_arm do
       url "https://github.com/Jktfe/a-nice-terminal/releases/download/antchat-v#{version}/antchat-#{version}-darwin-arm64.tar.gz"
-      sha256 "1d0efd3e961f7f8e6cb17c0457a2551348c2d8bb960f34ff847e257bedbc729e"
+      sha256 "9641f6a2eb1ad43adf4bb7bab0d7176916a458fc733decdabe93bc08f3984af0"
     end
     on_intel do
       url "https://github.com/Jktfe/a-nice-terminal/releases/download/antchat-v#{version}/antchat-#{version}-darwin-x64.tar.gz"
-      sha256 "bd41212a1b4965bf23c9f99392d2afd45eab5f561748410c4dc9c8192dc6ca95"
+      sha256 "e1aa2554eb7c7d255bc832c73a18fd288029d572e39905884fa009470b2607ff"
     end
   end
 
