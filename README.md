@@ -32,7 +32,7 @@ brew install --cask jktfe/antchat/antchat       # Mac app
 The first push-window Mac app drop is a **development-signed Mac Catalyst dogfood build** served over JWPK's tailnet from `mac.kingfisher-interval.ts.net:8787`. It is not notarised yet; macOS Gatekeeper may quarantine it. After install:
 
 ```sh
-xattr -d com.apple.quarantine /Applications/Antchat.app
+xattr -dr com.apple.quarantine /Applications/Antchat.app
 open /Applications/Antchat.app
 ```
 
@@ -86,7 +86,8 @@ The Mac app reuses the same `~/.ant/config.json` when present and falls back to 
 | --- | --- | --- |
 | `brew install --cask antchat` cannot connect to `mac.kingfisher-interval.ts.net:8787` | Dogfood artifact server is not running on the Mac mini or laptop is off tailnet | Ask the native room to restart the `antchat-dogfood-http` tmux session, or wait for the signed GitHub Release cutover. |
 | `brew install --cask antchat` fails with `sha256 mismatch` | The dogfood zip changed but the cask was not bumped | Ask the native room to update `Casks/antchat.rb` with the current sha256. |
-| `Antchat.app is damaged and can't be opened` | Gatekeeper quarantine on unsigned first-cut | `xattr -d com.apple.quarantine /Applications/Antchat.app` |
+| `Apple could not verify "Antchat" is free of malware` | Dogfood build is development-signed but not notarised | `xattr -dr com.apple.quarantine /Applications/Antchat.app`, or right-click `Antchat.app` → Open, or System Settings → Privacy & Security → Open Anyway |
+| `Antchat.app is damaged and can't be opened` | Gatekeeper quarantine on unsigned first-cut | `xattr -dr com.apple.quarantine /Applications/Antchat.app` |
 | Right-click → Open shows no "Open" option | macOS 15+ removed legacy quarantine bypass for some bundle types | `sudo spctl --master-disable` (temporarily), or use the `xattr` command above. |
 | App opens then immediately quits | Probably missing config + identity-gate 403 | Sign in via the app's `/login` surface; or pre-populate `~/.ant/config.json` from the CLI: `antchat join <share-string>` |
 | Cask install can't find `Antchat.app` | The .app product name in the cask might not match what xcodebuild produced | Check `app 'Antchat.app'` line in `Casks/antchat.rb` matches the actual bundle name produced by the build pipeline. |
