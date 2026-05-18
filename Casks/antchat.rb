@@ -14,7 +14,7 @@
 
 cask "antchat" do
   version "0.1.0"
-  sha256 "3f090904c3e43aaa280c45d5accf38ab6c57b023a1ff75a613a3b70cdf99c64a"
+  sha256 "f8d258cc658b846b6b1bd1032ab6379c95d72cfa9483f8f8f5598e8764219abe"
 
   url "http://mac.kingfisher-interval.ts.net:8787/Antchat-#{version}-maccatalyst.zip",
       verified: "mac.kingfisher-interval.ts.net:8787/"
