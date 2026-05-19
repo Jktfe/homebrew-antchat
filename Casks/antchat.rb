@@ -19,12 +19,12 @@
 # Jktfe/antchat target (`vc.newmodel.antchat`) — different product, distinct
 # Preferences/Caches paths in the zap block below.
 #
-# Current state: v0.1.0 release DMG is signed, notarised, stapled, and
+# Current state: v0.1.1 release DMG is signed, notarised, stapled, and
 # published from Jktfe/antchat GitHub Releases.
 
 cask "antchat" do
-  version "0.1.0"
-  sha256 "074a9faf4b38e9d36bdc632299370de3e97e8c172f0186c503e4669858e95d6e"
+  version "0.1.1"
+  sha256 "41aff5912378e50dc9ba613a0b60c9d46240d18049bbca988c3142242a32fb29"
 
   url "https://github.com/Jktfe/antchat/releases/download/v#{version}/Antchat-#{version}.dmg"
   name "Ant Chat"
