@@ -5,7 +5,7 @@ Homebrew tap for **antchat** — the ANT chat client family. Two install paths:
 | What you get | Command | Path |
 | --- | --- | --- |
 | **CLI binary** (single-binary chat client, no Bun/Node host required) | `brew install antchat` | `/opt/homebrew/bin/antchat` |
-| **macOS app** (native Catalyst .app — chat UI on your Mac) | `brew install --cask antchat` | `/Applications/Antchat.app` |
+| **macOS app** (native SwiftUI app — chat UI on your Mac) | `brew install --cask antchat` | `/Applications/Antchat.app` |
 
 Both share the brand. Formulas and Casks are distinct Homebrew namespaces — they co-exist without collision.
 
@@ -27,18 +27,15 @@ brew install jktfe/antchat/antchat              # CLI
 brew install --cask jktfe/antchat/antchat       # Mac app
 ```
 
-## First-cut Mac app — dogfood build
+## First-cut Mac app — signed release
 
-The first push-window Mac app drop is a **development-signed Mac Catalyst dogfood build** served over JWPK's tailnet from `mac.kingfisher-interval.ts.net:8787`. It is not notarised yet; macOS Gatekeeper may quarantine it. After install:
+The first native Mac app drop is a **Developer ID signed, notarised, stapled DMG** published from `Jktfe/antchat` GitHub Releases. Homebrew downloads the same DMG that can be emailed directly to colleagues.
 
 ```sh
-xattr -dr com.apple.quarantine /Applications/Antchat.app
-open /Applications/Antchat.app
+brew install --cask jktfe/antchat/antchat
 ```
 
-Or right-click → Open the first time (System Settings → Privacy & Security → Open Anyway also works).
-
-Properly signed + notarised builds are on the path via the GitHub Actions signing-secrets task; this is the dogfood-tonight cut.
+The app identity is `Ant Chat` / `vc.newmodel.antchat`; this is the fresh SwiftUI native app, not the older antios Catalyst dogfood bridge.
 
 ## Verify
 
@@ -84,48 +81,26 @@ The Mac app reuses the same `~/.ant/config.json` when present and falls back to 
 
 | Symptom | Cause | Fix |
 | --- | --- | --- |
-| `brew install --cask antchat` cannot connect to `mac.kingfisher-interval.ts.net:8787` | Dogfood artifact server is not running on the Mac mini or laptop is off tailnet | Ask the native room to restart the `antchat-dogfood-http` tmux session, or wait for the signed GitHub Release cutover. |
-| `brew install --cask antchat` fails with `sha256 mismatch` | The dogfood zip changed but the cask was not bumped | Ask the native room to update `Casks/antchat.rb` with the current sha256. |
-| `Apple could not verify "Antchat" is free of malware` | Dogfood build is development-signed but not notarised | `xattr -dr com.apple.quarantine /Applications/Antchat.app`, or right-click `Antchat.app` → Open, or System Settings → Privacy & Security → Open Anyway |
-| `Antchat.app is damaged and can't be opened` | Gatekeeper quarantine on unsigned first-cut | `xattr -dr com.apple.quarantine /Applications/Antchat.app` |
-| Right-click → Open shows no "Open" option | macOS 15+ removed legacy quarantine bypass for some bundle types | `sudo spctl --master-disable` (temporarily), or use the `xattr` command above. |
-| App opens then immediately quits | Probably missing config + identity-gate 403 | Sign in via the app's `/login` surface; or pre-populate `~/.ant/config.json` from the CLI: `antchat join <share-string>` |
+| `brew install --cask antchat` fails with `sha256 mismatch` | The GitHub Release DMG changed but the cask was not bumped | Update `Casks/antchat.rb` with the current release sha256. |
+| `Apple could not verify "Antchat" is free of malware` | The DMG was not notarised or the local install is an old dogfood build | Reinstall from the GitHub Release-backed cask; the v0.1.0 DMG is notarised + stapled. |
+| App opens then immediately quits | Probably missing server/login state | Sign in with the dev-team email, password, and `NEW-MODEL-ANT-DEV-<email>` licence code. |
 | Cask install can't find `Antchat.app` | The .app product name in the cask might not match what xcodebuild produced | Check `app 'Antchat.app'` line in `Casks/antchat.rb` matches the actual bundle name produced by the build pipeline. |
 
 ## Release pipeline (maintainer reference)
 
 CLI: `Jktfe/a-nice-terminal/.github/workflows/release-antchat.yml` emits `antchat-v<version>` tags with two binary tarballs + SHA256SUMS. The Formula here is bumped on each release.
 
-Mac app: first dogfood pipeline — for the first push-window cut, swift ships the .app by hand:
+Mac app: `Jktfe/antchat/.github/workflows/release-dmg.yml` emits a signed, notarised, stapled DMG on `v*.*.*` tags and attaches it to the matching GitHub Release. The cask points at:
 
 ```sh
-# from antios root
-xcodegen generate
-xcodebuild -project ANT.xcodeproj -scheme Antchat \
-  -destination 'generic/platform=macOS,variant=Mac Catalyst' \
-  -configuration Release -derivedDataPath build/DerivedData build
-
-# zip + checksum
-ditto -c -k --keepParent \
-  build/DerivedData/Build/Products/Release-maccatalyst/Antchat.app \
-  build/Antchat-0.1.0-maccatalyst.zip
-shasum -a 256 build/Antchat-0.1.0-maccatalyst.zip
-
-# serve over tailnet until the signed release workflow lands
-tmux new-session -d -s antchat-dogfood-http \
-  'cd /Users/jamesking/CascadeProjects/antios/build && python3 -m http.server 8787 --bind 0.0.0.0'
-
-# patch Casks/antchat.rb url + sha256
-# commit + push
+https://github.com/Jktfe/antchat/releases/download/v#{version}/Antchat-#{version}.dmg
 ```
-
-When this happens regularly, the `release-antchat-app.yml` workflow will replace the by-hand step and the cask URL will move from the tailnet dogfood server to a signed GitHub Release asset.
 
 ## Repo
 
 - Tap repo: <https://github.com/Jktfe/homebrew-antchat>
 - antchat CLI source: <https://github.com/Jktfe/a-nice-terminal>
-- Mac app source: <https://github.com/Jktfe/antios> (Mac Catalyst target inside the ANT app)
+- Mac app source: <https://github.com/Jktfe/antchat>
 
 ## License
 

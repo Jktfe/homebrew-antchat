@@ -1,37 +1,48 @@
-# Homebrew Cask for the Antchat Mac app — Mac Catalyst build of the
-# antios SwiftUI antchat surface.
+# Homebrew Cask for the Antchat Mac app — fresh native SwiftUI build
+# from Jktfe/antchat (NOT the antios Catalyst dev artefact).
 #
 # Lives in the same tap as the `antchat` CLI Formula (Formula/antchat.rb).
 # Homebrew formulas + casks are distinct namespaces, so:
 #   brew install antchat            → installs the CLI binary (Formula)
 #   brew install --cask antchat     → installs Antchat.app (this Cask)
 #
-# Dogfood build, 2026-05-18:
-#   - Served over JWPK's tailnet from the Mac mini on port 8787.
-#   - Development-signed, not notarised.
-#   - Replace this URL with a signed GitHub Release URL once the Actions
-#     signing/notarisation workflow lands.
+# Release pipeline (per ObsidiANT/plans/antchat-dmg-release-pipeline-v0.md
+# from @evolveanttauri + audit §F13/F14):
+#   1. Tag `v<version>`.
+#   2. GitHub Actions workflow `release-dmg.yml` in Jktfe/antchat:
+#        xcodebuild archive → exportArchive → create-dmg → codesign →
+#        notarytool submit → stapler staple → re-zip → publish release.
+#   3. Cask url + sha256 bumped to point at the new release asset.
+#   4. User: `brew upgrade --cask antchat` → Gatekeeper accepts (notarised).
+#
+# Bundle ID changed from antios (`vc.newmodel.ant.chat`) to the fresh
+# Jktfe/antchat target (`vc.newmodel.antchat`) — different product, distinct
+# Preferences/Caches paths in the zap block below.
+#
+# Current state: v0.1.0 release DMG is signed, notarised, stapled, and
+# published from Jktfe/antchat GitHub Releases.
 
 cask "antchat" do
   version "0.1.0"
-  sha256 "f8d258cc658b846b6b1bd1032ab6379c95d72cfa9483f8f8f5598e8764219abe"
+  sha256 "074a9faf4b38e9d36bdc632299370de3e97e8c172f0186c503e4669858e95d6e"
 
-  url "http://mac.kingfisher-interval.ts.net:8787/Antchat-#{version}-maccatalyst.zip",
-      verified: "mac.kingfisher-interval.ts.net:8787/"
-  name "Antchat"
+  url "https://github.com/Jktfe/antchat/releases/download/v#{version}/Antchat-#{version}.dmg"
+  name "Ant Chat"
   desc "Native macOS antchat — chat with ANT rooms + agents from your Mac"
-  homepage "https://github.com/Jktfe/antios"
+  homepage "https://github.com/Jktfe/antchat"
 
-  # Mac Catalyst app — first cut targets macOS 14+.
+  # Fresh SwiftUI native build targets macOS 14+ (Sonoma).
   depends_on macos: ">= :sonoma"
 
   app "Antchat.app"
 
   # Uninstall: also clear preferences + caches so brew uninstall is clean.
+  # Bundle ID = vc.newmodel.antchat (NOT vc.newmodel.ant.chat which was the
+  # antios Catalyst dev artefact's id — distinct paths).
   zap trash: [
     "~/Library/Application Support/Antchat",
-    "~/Library/Caches/vc.newmodel.ant.chat",
-    "~/Library/Preferences/vc.newmodel.ant.chat.plist",
-    "~/Library/Saved Application State/vc.newmodel.ant.chat.savedState"
+    "~/Library/Caches/vc.newmodel.antchat",
+    "~/Library/Preferences/vc.newmodel.antchat.plist",
+    "~/Library/Saved Application State/vc.newmodel.antchat.savedState"
   ]
 end
