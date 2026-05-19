@@ -33,6 +33,7 @@ cask "antchat" do
 
   # Fresh SwiftUI native build targets macOS 14+ (Sonoma).
   depends_on macos: ">= :sonoma"
+  depends_on formula: "jktfe/antchat/antchat"
 
   app "Antchat.app"
 

@@ -9,6 +9,8 @@ Homebrew tap for **antchat** — the ANT chat client family. Two install paths:
 
 Both share the brand. Formulas and Casks are distinct Homebrew namespaces — they co-exist without collision.
 
+The macOS app cask depends on the CLI formula, so installing the app via Homebrew also installs `/opt/homebrew/bin/antchat` for terminal and agent workflows.
+
 ## Install
 
 ```sh
@@ -25,6 +27,21 @@ Direct, without tapping first:
 ```sh
 brew install jktfe/antchat/antchat              # CLI
 brew install --cask jktfe/antchat/antchat       # Mac app
+```
+
+After installing the Mac app, the CLI is available too:
+
+```sh
+antchat --help
+antchat --version
+```
+
+CLI documentation is available in the running ANT server:
+
+```sh
+open http://localhost:6174/discover
+open http://localhost:6174/vocab
+open http://localhost:6174/visuals
 ```
 
 ## First-cut Mac app — signed release
