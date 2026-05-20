@@ -23,8 +23,8 @@
 # published from Jktfe/antchat GitHub Releases.
 
 cask "antchat" do
-  version "0.1.3"
-  sha256 "8cc424e2c421cab69186c83a618de0b369ae7a2bab581db9408c835660f40f20"
+  version "0.1.4"
+  sha256 "da941b82aad472701c7724152446b1e7969ac9d0fd38b8056e20502f5fb7247c"
 
   url "https://github.com/Jktfe/antchat/releases/download/v#{version}/Antchat-#{version}.dmg"
   name "Ant Chat"
