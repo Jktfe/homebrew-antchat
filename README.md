@@ -99,7 +99,7 @@ The Mac app reuses the same `~/.ant/config.json` when present and falls back to 
 | Symptom | Cause | Fix |
 | --- | --- | --- |
 | `brew install --cask antchat` fails with `sha256 mismatch` | The `antonline.dev` DMG changed but the cask was not bumped | Update `Casks/antchat.rb` with the current release sha256. |
-| `Apple could not verify "Antchat" is free of malware` | The DMG was not notarised or the local install is an old dogfood build | Reinstall from the `antonline.dev` cask; the v0.1.5 DMG is notarised + stapled. |
+| `Apple could not verify "Antchat" is free of malware` | The DMG was not notarised or the local install is an old dogfood build | Reinstall from the `antonline.dev` cask; the v0.1.6 DMG is notarised + stapled. |
 | App opens then immediately quits | Probably missing server/login state | Sign in with the dev-team email, password, and `NEW-MODEL-ANT-DEV-<email>` licence code. |
 | Cask install can't find `Antchat.app` | The .app product name in the cask might not match what xcodebuild produced | Check `app 'Antchat.app'` line in `Casks/antchat.rb` matches the actual bundle name produced by the build pipeline. |
 
