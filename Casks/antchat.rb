@@ -28,7 +28,7 @@ cask "antchat" do
 
   url "https://antonline.dev/downloads/antchat/v#{version}/Antchat-#{version}.dmg"
   name "Ant Chat"
-  desc "Native macOS antchat — chat with ANT rooms + agents from your Mac"
+  desc "Antchat — chat with ANT rooms and agents from a native desktop client"
   homepage "https://antonline.dev"
 
   # Fresh SwiftUI native build targets macOS 14+ (Sonoma).
