@@ -1,15 +1,15 @@
 # homebrew-antchat
 
-Homebrew tap for **antchat** — the ANT chat client family. Two install paths:
+Homebrew tap for **ANT / Antchat**. The current app cask installs the native
+Mac app plus the fresh `ant` CLI used by agents.
 
 | What you get | Command | Path |
 | --- | --- | --- |
-| **CLI binary** (single-binary chat client, no Bun/Node host required) | `brew install antchat` | `/opt/homebrew/bin/antchat` |
-| **macOS app** (native SwiftUI app — chat UI on your Mac) | `brew install --cask antchat` | `/Applications/Antchat.app` |
+| **macOS app + fresh CLI** (native SwiftUI app + `ant` for terminal/agent workflows) | `brew install --cask antchat` | `/Applications/Antchat.app` + `/opt/homebrew/bin/ant` |
+| **Legacy CLI binary** (old standalone `antchat` command) | `brew install antchat` | `/opt/homebrew/bin/antchat` |
 
-Both share the brand. Formulas and Casks are distinct Homebrew namespaces — they co-exist without collision.
-
-The macOS app cask depends on the CLI formula, so installing the app via Homebrew also installs `/opt/homebrew/bin/antchat` for terminal and agent workflows.
+The legacy `antchat` formula remains for old installs, but new Mac app and
+agent workflows should use `ant`.
 
 ## Install
 
@@ -17,23 +17,24 @@ The macOS app cask depends on the CLI formula, so installing the app via Homebre
 # Tap once
 brew tap jktfe/antchat
 
-# Pick whichever you want (or both)
-brew install antchat           # CLI
-brew install --cask antchat    # Mac app
+# Current path
+brew install --cask antchat    # Mac app + fresh `ant` CLI
+
+# Legacy only, not needed for the app
+brew install antchat           # old `antchat` CLI
 ```
 
 Direct, without tapping first:
 
 ```sh
-brew install jktfe/antchat/antchat              # CLI
-brew install --cask jktfe/antchat/antchat       # Mac app
+brew install --cask jktfe/antchat/antchat       # Mac app + fresh `ant` CLI
 ```
 
 After installing the Mac app, the CLI is available too:
 
 ```sh
-antchat --help
-antchat --version
+ant --help
+ant --version
 ```
 
 CLI documentation is available in the running ANT server:
@@ -57,9 +58,9 @@ The app identity is `Ant Chat` / `vc.newmodel.antchat`; this is the fresh SwiftU
 ## Verify
 
 ```sh
-# CLI
-antchat --version
-antchat --help
+# Fresh CLI installed by the cask
+ant --version
+ant --help
 
 # Mac app — confirm cask is registered
 brew list --cask antchat
@@ -70,19 +71,19 @@ ls -l /Applications/Antchat.app
 
 ```sh
 brew update
-brew upgrade antchat                # CLI
-brew upgrade --cask antchat         # Mac app
+brew upgrade --cask antchat         # Mac app + fresh `ant` CLI
+brew upgrade antchat                # Legacy CLI only, if installed
 ```
 
 ## Uninstall
 
 ```sh
-brew uninstall antchat              # CLI (binary only)
-brew uninstall --cask antchat       # Mac app — also runs the `zap` block to clear:
+brew uninstall --cask antchat       # Mac app + fresh `ant` CLI, also runs the `zap` block to clear:
                                     #   ~/Library/Application Support/Antchat
-                                    #   ~/Library/Caches/vc.newmodel.ant.chat
-                                    #   ~/Library/Preferences/vc.newmodel.ant.chat.plist
-                                    #   ~/Library/Saved Application State/vc.newmodel.ant.chat.savedState
+                                    #   ~/Library/Caches/vc.newmodel.antchat
+                                    #   ~/Library/Preferences/vc.newmodel.antchat.plist
+                                    #   ~/Library/Saved Application State/vc.newmodel.antchat.savedState
+brew uninstall antchat              # Legacy CLI only, if installed
 
 # Untap if you want to clean up:
 brew untap jktfe/antchat
@@ -90,7 +91,8 @@ brew untap jktfe/antchat
 
 ## Configuration
 
-The CLI reads `~/.ant/config.json` for its server URL + api key. See `antchat --help` for the full subcommand surface (`join`, `rooms`, `msg`, `chat`, `tasks`, `plan`, `doc`, `deck`, `sheet`, `mcp`, `watch`, `web`).
+The fresh CLI is installed as `ant`. See `ant --help` for the current
+subcommand surface.
 
 The Mac app reuses the same `~/.ant/config.json` when present and falls back to in-app server-url + sign-in if absent.
 
@@ -107,7 +109,9 @@ The Mac app reuses the same `~/.ant/config.json` when present and falls back to 
 
 CLI: `Jktfe/a-nice-terminal/.github/workflows/release-antchat.yml` emits `antchat-v<version>` tags with two binary tarballs + SHA256SUMS. The Formula here is bumped on each release.
 
-Mac app: `Jktfe/antchat/.github/workflows/release-dmg.yml` emits a signed, notarised, stapled private DMG artefact. The maintainer copies that artefact to `Jktfe/antonline-dev` so it is served from `antonline.dev`. The cask points at:
+Mac app: `Jktfe/antchat/.github/workflows/release-dmg.yml` emits a signed,
+notarised, stapled private DMG artefact. The maintainer copies that artefact to
+`Jktfe/antonline-dev` so it is served from `antonline.dev`. The cask points at:
 
 ```sh
 https://antonline.dev/downloads/antchat/Antchat-#{version}.dmg
@@ -116,7 +120,7 @@ https://antonline.dev/downloads/antchat/Antchat-#{version}.dmg
 ## Repo
 
 - Tap repo: <https://github.com/Jktfe/homebrew-antchat>
-- antchat CLI source: <https://github.com/Jktfe/a-nice-terminal>
+- fresh `ant` CLI source: <https://github.com/Jktfe/a-nice-terminal>
 - Mac app source: <https://github.com/Jktfe/antchat>
 
 ## License
