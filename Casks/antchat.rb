@@ -11,8 +11,8 @@
 # Release pipeline (Jktfe/antchat .github/workflows/release-dmg.yml):
 #   1. Tag `v<version>` on Jktfe/antchat.
 #   2. release-dmg.yml builds, signs, notarises, staples the DMG, then
-#      pushes it to Jktfe/antonline-dev at
-#      static/releases/antchat/v<version>/Antchat-<version>.dmg.
+#      uploads the private Actions artefact to Jktfe/antonline-dev at
+#      static/downloads/antchat/Antchat-<version>.dmg.
 #   3. cask-bump.yml opens a PR against this tap bumping version + url
 #      + sha256 (computed by re-downloading the published artefact).
 #   4. User: `brew upgrade --cask antchat` → Gatekeeper accepts (notarised).
@@ -22,16 +22,16 @@
 # Preferences/Caches paths in the zap block below.
 
 cask "antchat" do
-  version "0.1.4"
-  sha256 "PLACEHOLDER_DMG_SHA256_REPLACE_AT_RELEASE_TIME"
+  version "0.1.5"
+  sha256 "f0ba845911b17aaceec06ef508a7923d1b83c2994639186de14c6f46d7b010d6"
 
-  url "https://antonline.dev/releases/antchat/v#{version}/Antchat-#{version}.dmg"
+  url "https://antonline.dev/downloads/antchat/Antchat-#{version}.dmg"
   name "Antchat"
-  desc "Antchat — chat with ANT rooms and agents from a native desktop client"
+  desc "Native desktop client for ANT rooms and agents"
   homepage "https://www.antonline.dev/"
 
   # Fresh SwiftUI native build targets macOS 14+ (Sonoma).
-  depends_on macos: ">= :sonoma"
+  depends_on macos: :sonoma
   depends_on formula: "jktfe/antchat/antchat"
 
   app "Antchat.app"
@@ -40,11 +40,11 @@ cask "antchat" do
   # Bundle ID = vc.newmodel.antchat (NOT vc.newmodel.ant.chat which was the
   # antios Catalyst dev artefact's id — distinct paths).
   zap trash: [
+    "~/.ant/account",
+    "~/.ant/active-workspace.json",
     "~/Library/Application Support/Antchat",
     "~/Library/Caches/vc.newmodel.antchat",
     "~/Library/Preferences/vc.newmodel.antchat.plist",
     "~/Library/Saved Application State/vc.newmodel.antchat.savedState",
-    "~/.ant/account",
-    "~/.ant/active-workspace.json"
   ]
 end

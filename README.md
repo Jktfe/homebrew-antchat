@@ -46,7 +46,7 @@ open http://localhost:6174/visuals
 
 ## First-cut Mac app — signed release
 
-The first native Mac app drop is a **Developer ID signed, notarised, stapled DMG** published from `Jktfe/antchat` GitHub Releases. Homebrew downloads the same DMG that can be emailed directly to colleagues.
+The first native Mac app drop is a **Developer ID signed, notarised, stapled DMG** built from the private `Jktfe/antchat` repo and hosted on `antonline.dev`. Homebrew downloads that DMG, so the install UX stays simple without publishing premium app binaries from the private source repo.
 
 ```sh
 brew install --cask jktfe/antchat/antchat
@@ -98,8 +98,8 @@ The Mac app reuses the same `~/.ant/config.json` when present and falls back to 
 
 | Symptom | Cause | Fix |
 | --- | --- | --- |
-| `brew install --cask antchat` fails with `sha256 mismatch` | The GitHub Release DMG changed but the cask was not bumped | Update `Casks/antchat.rb` with the current release sha256. |
-| `Apple could not verify "Antchat" is free of malware` | The DMG was not notarised or the local install is an old dogfood build | Reinstall from the GitHub Release-backed cask; the v0.1.2 DMG is notarised + stapled. |
+| `brew install --cask antchat` fails with `sha256 mismatch` | The `antonline.dev` DMG changed but the cask was not bumped | Update `Casks/antchat.rb` with the current release sha256. |
+| `Apple could not verify "Antchat" is free of malware` | The DMG was not notarised or the local install is an old dogfood build | Reinstall from the `antonline.dev` cask; the v0.1.5 DMG is notarised + stapled. |
 | App opens then immediately quits | Probably missing server/login state | Sign in with the dev-team email, password, and `NEW-MODEL-ANT-DEV-<email>` licence code. |
 | Cask install can't find `Antchat.app` | The .app product name in the cask might not match what xcodebuild produced | Check `app 'Antchat.app'` line in `Casks/antchat.rb` matches the actual bundle name produced by the build pipeline. |
 
@@ -107,10 +107,10 @@ The Mac app reuses the same `~/.ant/config.json` when present and falls back to 
 
 CLI: `Jktfe/a-nice-terminal/.github/workflows/release-antchat.yml` emits `antchat-v<version>` tags with two binary tarballs + SHA256SUMS. The Formula here is bumped on each release.
 
-Mac app: `Jktfe/antchat/.github/workflows/release-dmg.yml` emits a signed, notarised, stapled DMG on `v*.*.*` tags and attaches it to the matching GitHub Release. The cask points at:
+Mac app: `Jktfe/antchat/.github/workflows/release-dmg.yml` emits a signed, notarised, stapled private DMG artefact. The maintainer copies that artefact to `Jktfe/antonline-dev` so it is served from `antonline.dev`. The cask points at:
 
 ```sh
-https://github.com/Jktfe/antchat/releases/download/v#{version}/Antchat-#{version}.dmg
+https://antonline.dev/downloads/antchat/Antchat-#{version}.dmg
 ```
 
 ## Repo
