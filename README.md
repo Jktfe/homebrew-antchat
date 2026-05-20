@@ -1,10 +1,11 @@
 # homebrew-antchat
 
-Homebrew tap for **ANT / Antchat**. The current app cask installs the native
-Mac app plus the fresh `ant` CLI used by agents.
+Homebrew tap for **ANT / Antchat**. The current app cask installs the native Mac
+app plus the fresh `ant` CLI used by agents.
 
 | What you get | Command | Path |
 | --- | --- | --- |
+| **Fresh CLI** (rooms, accounts, handles, routing) | `brew install ant` | `/opt/homebrew/bin/ant` |
 | **macOS app + fresh CLI** (native SwiftUI app + `ant` for terminal/agent workflows) | `brew install --cask antchat` | `/Applications/Antchat.app` + `/opt/homebrew/bin/ant` |
 | **Legacy CLI binary** (old standalone `antchat` command) | `brew install antchat` | `/opt/homebrew/bin/antchat` |
 
@@ -19,6 +20,7 @@ brew tap jktfe/antchat
 
 # Current path
 brew install --cask antchat    # Mac app + fresh `ant` CLI
+brew install ant               # Fresh CLI only
 
 # Legacy only, not needed for the app
 brew install antchat           # old `antchat` CLI
@@ -28,6 +30,7 @@ Direct, without tapping first:
 
 ```sh
 brew install --cask jktfe/antchat/antchat       # Mac app + fresh `ant` CLI
+brew install jktfe/antchat/ant                  # Fresh CLI only
 ```
 
 After installing the Mac app, the CLI is available too:
@@ -71,6 +74,7 @@ ls -l /Applications/Antchat.app
 
 ```sh
 brew update
+brew upgrade ant                   # Fresh CLI
 brew upgrade --cask antchat         # Mac app + fresh `ant` CLI
 brew upgrade antchat                # Legacy CLI only, if installed
 ```
@@ -84,6 +88,7 @@ brew uninstall --cask antchat       # Mac app + fresh `ant` CLI, also runs the `
                                     #   ~/Library/Preferences/vc.newmodel.antchat.plist
                                     #   ~/Library/Saved Application State/vc.newmodel.antchat.savedState
 brew uninstall antchat              # Legacy CLI only, if installed
+brew uninstall ant                  # Fresh CLI only, if installed separately
 
 # Untap if you want to clean up:
 brew untap jktfe/antchat

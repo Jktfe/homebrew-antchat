@@ -3,9 +3,9 @@
 # under option B: binary public on antonline.dev, source private, license-
 # bundle gating enforced in-app at runtime).
 #
-# Installs both the native app and the bundled fresh `ant` CLI. The legacy
-# `antchat` Formula in this tap is not used by the app and should not be a
-# dependency of this cask.
+# Installs both the native app and the fresh `ant` CLI. The legacy `antchat`
+# Formula in this tap is not used by the app and should not be a dependency of
+# this cask.
 #
 # Release pipeline (Jktfe/antchat .github/workflows/release-dmg.yml):
 #   1. Tag `v<version>` on Jktfe/antchat.
@@ -31,9 +31,9 @@ cask "antchat" do
 
   # Fresh SwiftUI native build targets macOS 14+ (Sonoma).
   depends_on macos: :sonoma
+  depends_on formula: "jktfe/antchat/ant"
 
   app "Antchat.app"
-  binary "#{appdir}/Antchat.app/Contents/Resources/cli/ant", target: "ant"
 
   # Uninstall: also clear preferences + caches so brew uninstall is clean.
   # Bundle ID = vc.newmodel.antchat (NOT vc.newmodel.ant.chat which was the
@@ -48,7 +48,7 @@ cask "antchat" do
   ]
 
   caveats <<~EOS
-    The fresh ANT CLI is installed as:
+    The fresh ANT CLI is installed by the `ant` formula as:
       ant
 
     The older `antchat` command is a legacy standalone formula and is not used
