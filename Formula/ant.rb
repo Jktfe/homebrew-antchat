@@ -7,12 +7,12 @@ class Ant < Formula
   on_macos do
     on_arm do
       url "https://github.com/Jktfe/a-nice-terminal/releases/download/ant-v#{version}/ant-#{version}-darwin-arm64.tar.gz"
-      sha256 "aa90c4b26ca53035d141f9403e9e76f46a7327bf5595a98ba4db9411a9d54d85"
+      sha256 "4a1ae771eca33ea977b92353704776491103e8626d6d0469d70bae37ce5044c8"
     end
 
     on_intel do
       url "https://github.com/Jktfe/a-nice-terminal/releases/download/ant-v#{version}/ant-#{version}-darwin-x64.tar.gz"
-      sha256 "fd25b024e668f9d30ffa8500e372daa38205a10734923e33a5303d62f167b715"
+      sha256 "7f3a47f4e63729587b92efffc0b3c15589f1e56b3c048f38210f945cbf602737"
     end
   end
 
