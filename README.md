@@ -7,10 +7,10 @@ app plus the fresh `ant` CLI used by agents.
 | --- | --- | --- |
 | **Fresh CLI** (rooms, accounts, handles, routing) | `brew install ant` | `/opt/homebrew/bin/ant` |
 | **macOS app + fresh CLI** (native SwiftUI app + `ant` for terminal/agent workflows) | `brew install --cask antchat` | `/Applications/Antchat.app` + `/opt/homebrew/bin/ant` |
-| **Legacy CLI binary** (old standalone `antchat` command) | `brew install antchat` | `/opt/homebrew/bin/antchat` |
+| **App compatibility command** (`antchat --version`, forwards terminal workflows to `ant`) | `brew install antchat` | `/opt/homebrew/bin/antchat` |
 
-The legacy `antchat` formula remains for old installs, but new Mac app and
-agent workflows should use `ant`.
+The `antchat` formula is now a small compatibility wrapper pinned to the Mac
+app version. Real terminal and agent workflows should use `ant`.
 
 ## Install
 
@@ -22,8 +22,8 @@ brew tap jktfe/antchat
 brew install --cask antchat    # Mac app + fresh `ant` CLI
 brew install ant               # Fresh CLI only
 
-# Legacy only, not needed for the app
-brew install antchat           # old `antchat` CLI
+# Compatibility command only
+brew install antchat           # `antchat --version`, forwards to `ant`
 ```
 
 Direct, without tapping first:
@@ -36,6 +36,7 @@ brew install jktfe/antchat/ant                  # Fresh CLI only
 After installing the Mac app, the CLI is available too:
 
 ```sh
+antchat --version
 ant --help
 ant --version
 ```
@@ -62,6 +63,7 @@ The app identity is `Ant Chat` / `vc.newmodel.antchat`; this is the fresh SwiftU
 
 ```sh
 # Fresh CLI installed by the cask
+antchat --version
 ant --version
 ant --help
 
@@ -76,7 +78,7 @@ ls -l /Applications/Antchat.app
 brew update
 brew upgrade ant                   # Fresh CLI
 brew upgrade --cask antchat         # Mac app + fresh `ant` CLI
-brew upgrade antchat                # Legacy CLI only, if installed
+brew upgrade antchat                # Compatibility command, if installed
 ```
 
 ## Uninstall
@@ -87,7 +89,7 @@ brew uninstall --cask antchat       # Mac app + fresh `ant` CLI, also runs the `
                                     #   ~/Library/Caches/vc.newmodel.antchat
                                     #   ~/Library/Preferences/vc.newmodel.antchat.plist
                                     #   ~/Library/Saved Application State/vc.newmodel.antchat.savedState
-brew uninstall antchat              # Legacy CLI only, if installed
+brew uninstall antchat              # Compatibility command only, if installed
 brew uninstall ant                  # Fresh CLI only, if installed separately
 
 # Untap if you want to clean up:
@@ -96,8 +98,9 @@ brew untap jktfe/antchat
 
 ## Configuration
 
-The fresh CLI is installed as `ant`. See `ant --help` for the current
-subcommand surface.
+The fresh CLI is installed as `ant`. The `antchat` command exists for app
+version checks and compatibility, then forwards non-version commands to `ant`.
+See `ant --help` for the current subcommand surface.
 
 The Mac app reuses the same `~/.ant/config.json` when present and falls back to in-app server-url + sign-in if absent.
 
@@ -112,7 +115,9 @@ The Mac app reuses the same `~/.ant/config.json` when present and falls back to 
 
 ## Release pipeline (maintainer reference)
 
-CLI: `Jktfe/a-nice-terminal/.github/workflows/release-antchat.yml` emits `antchat-v<version>` tags with two binary tarballs + SHA256SUMS. The Formula here is bumped on each release.
+CLI: `Jktfe/a-nice-terminal` emits the fresh `ant` binary. The `antchat`
+Formula here is a compatibility wrapper and should be bumped with the Mac app
+cask so `antchat --version` matches the installed app release.
 
 Mac app: `Jktfe/antchat/.github/workflows/release-dmg.yml` emits a signed,
 notarised, stapled private DMG artefact. The maintainer copies that artefact to

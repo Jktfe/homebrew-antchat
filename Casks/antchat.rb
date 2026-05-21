@@ -3,9 +3,9 @@
 # under option B: binary public on antonline.dev, source private, license-
 # bundle gating enforced in-app at runtime).
 #
-# Installs both the native app and the fresh `ant` CLI. The legacy `antchat`
-# Formula in this tap is not used by the app and should not be a dependency of
-# this cask.
+# Installs both the native app and the fresh `ant` CLI. The `antchat` Formula
+# is only a compatibility command so `antchat --version` matches the app
+# version and forwards terminal workflows to `ant`.
 #
 # Release pipeline (Jktfe/antchat .github/workflows/release-dmg.yml):
 #   1. Tag `v<version>` on Jktfe/antchat.
@@ -51,7 +51,6 @@ cask "antchat" do
     The fresh ANT CLI is installed by the `ant` formula as:
       ant
 
-    The older `antchat` command is a legacy standalone formula and is not used
-    by this app.
+    The `antchat` command is a compatibility wrapper for the Mac app version.
   EOS
 end
