@@ -21,8 +21,8 @@
 # Preferences/Caches paths in the zap block below.
 
 cask "antchat" do
-  version "0.2.1"
-  sha256 "613dd8510d5b3d7a1e10d2f3ed160e1255ac9de676db8f613ebf52dc115b8469"
+  version "0.2.2"
+  sha256 "c8d78bf8d007b1cdf98c8d0f8849ea70ca77c8d864afe56ab32b7087c4d57248"
 
   url "https://antonline.dev/releases/antchat/v#{version}/Antchat-#{version}.dmg"
   name "Antchat"
