@@ -33,6 +33,10 @@ cask "antchat" do
   desc "Native desktop client for ANT rooms and agents"
   homepage "https://www.antonline.dev/"
 
+  livecheck do
+    skip "Private GitHub release metadata; cask is bumped by release workflow/manual checksum verification"
+  end
+
   # Fresh SwiftUI native build targets macOS 14+ (Sonoma).
   depends_on macos: :sonoma
   depends_on formula: "jktfe/antchat/ant"
