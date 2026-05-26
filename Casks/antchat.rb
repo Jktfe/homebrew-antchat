@@ -22,9 +22,13 @@
 
 cask "antchat" do
   version "4.0.1"
-  sha256 "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
+  sha256 "32a85ed4f71a1eeb80ddbbbc8c519884656c76f13e293fcdeab5395b93568bc3"
 
-  url "https://antonline.dev/releases/antchat/v#{version}/Antchat-#{version}.dmg"
+  # antonline.dev publication for v4.0.1 hasn't fired; pointing at GitHub
+  # Releases (which has the DMG live) so `brew upgrade --cask antchat`
+  # works today. Switch back to antonline.dev when the publication chain
+  # is restored.
+  url "https://github.com/Jktfe/antchat/releases/download/v#{version}/Antchat-#{version}.dmg"
   name "Antchat"
   desc "Native desktop client for ANT rooms and agents"
   homepage "https://www.antonline.dev/"
