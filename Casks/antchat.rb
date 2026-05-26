@@ -21,10 +21,14 @@
 # Preferences/Caches paths in the zap block below.
 
 cask "antchat" do
-  version "0.2.4"
-  sha256 "dc43e918e7612b6d45c8a1d07dee5784fb84ab6f657ca5d2e1ae59eaee557cd2"
+  version "4.0.0"
+  sha256 "1b0b105db6d5ed8842dbadbfca1774ef0d1fd7b9fc6b40b838af0c2e720514c9"
 
-  url "https://antonline.dev/releases/antchat/v#{version}/Antchat-#{version}.dmg"
+  # Cask URL points at GitHub Releases for v4.0.0 because antonline.dev
+  # publication step in release-dmg.yml didn't fire for this version.
+  # Switch back to antonline.dev URL pattern when the publication chain
+  # is restored (separate fix track alongside #36 cask-bump.yml secrets).
+  url "https://github.com/Jktfe/antchat/releases/download/v#{version}/Antchat-#{version}.dmg"
   name "Antchat"
   desc "Native desktop client for ANT rooms and agents"
   homepage "https://www.antonline.dev/"
