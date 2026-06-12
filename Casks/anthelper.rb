@@ -11,7 +11,7 @@
 
 cask "anthelper" do
   version "0.1.0"
-  sha256 "PLACEHOLDER_FILLED_BY_FIRST_RELEASE"
+  sha256 "4f237b12bf4221072aaa5329b71711955c90b4d98b58ba39d71593ba5b255d84"
 
   url "https://antonline.dev/releases/anthelper/v#{version}/AntHelper-#{version}.dmg"
   name "ANT Helper"
