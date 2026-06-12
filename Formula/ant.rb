@@ -1,7 +1,6 @@
 class Ant < Formula
   desc "Fresh ANT CLI for rooms, accounts, handles, and agent routing"
   homepage "https://github.com/Jktfe/a-nice-terminal"
-  version "0.1.14"
   license "AGPL-3.0-or-later"
 
   on_macos do
