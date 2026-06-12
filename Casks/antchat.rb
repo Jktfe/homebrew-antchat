@@ -21,13 +21,15 @@
 # Preferences/Caches paths in the zap block below.
 
 cask "antchat" do
-  version "4.0.1"
-  sha256 "32a85ed4f71a1eeb80ddbbbc8c519884656c76f13e293fcdeab5395b93568bc3"
+  version "4.1.1"
+  sha256 "1d8c344fa9359f941edb766b764b6e9548cd0a2fe460b9895d966037b40371f0"
 
-  # DMG lives on antonline.dev (release-dmg.yml publishes there via
-  # antonline-dev repo). GitHub Releases URL doesn't work for anonymous
-  # brew because Jktfe/antchat is a private repo.
-  url "https://antonline.dev/releases/antchat/v#{version}/Antchat-#{version}.dmg"
+  # DMG lives on the PUBLIC Jktfe/antchat-releases repo (GitHub release
+  # assets — no 100MB git-file limit, anonymous downloads). The embedded
+  # ANT server pushed the DMG past GitHub's in-repo file cap, which broke
+  # the old antonline-dev git-publish path (v4.1.1, 2026-06-12). Source
+  # repo Jktfe/antchat stays private; artifacts are public.
+  url "https://github.com/Jktfe/antchat-releases/releases/download/v#{version}/Antchat-#{version}.dmg"
   name "Antchat"
   desc "Native desktop client for ANT rooms and agents"
   homepage "https://www.antonline.dev/"
