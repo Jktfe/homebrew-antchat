@@ -1,18 +1,18 @@
 class Ant < Formula
   desc "Fresh ANT CLI for rooms, accounts, handles, and agent routing"
   homepage "https://github.com/Jktfe/a-nice-terminal"
-  version "0.1.4"
+  version "0.1.14"
   license "AGPL-3.0-or-later"
 
   on_macos do
     on_arm do
-      url "https://github.com/Jktfe/a-nice-terminal/releases/download/ant-v#{version}/ant-#{version}-darwin-arm64.tar.gz"
-      sha256 "4a1ae771eca33ea977b92353704776491103e8626d6d0469d70bae37ce5044c8"
+      url "https://antonline.dev/releases/ant/v#{version}/ant-#{version}-darwin-universal.tar.gz"
+      sha256 "367cc1c49663385579047bc1b5bdeedbed9c6fe48a5392fba41606cc2e9e7ea5"
     end
 
     on_intel do
-      url "https://github.com/Jktfe/a-nice-terminal/releases/download/ant-v#{version}/ant-#{version}-darwin-x64.tar.gz"
-      sha256 "7f3a47f4e63729587b92efffc0b3c15589f1e56b3c048f38210f945cbf602737"
+      url "https://antonline.dev/releases/ant/v#{version}/ant-#{version}-darwin-universal.tar.gz"
+      sha256 "367cc1c49663385579047bc1b5bdeedbed9c6fe48a5392fba41606cc2e9e7ea5"
     end
   end
 

@@ -24,12 +24,10 @@ cask "antchat" do
   version "4.1.1"
   sha256 "1d8c344fa9359f941edb766b764b6e9548cd0a2fe460b9895d966037b40371f0"
 
-  # DMG lives on the PUBLIC Jktfe/antchat-releases repo (GitHub release
-  # assets — no 100MB git-file limit, anonymous downloads). The embedded
-  # ANT server pushed the DMG past GitHub's in-repo file cap, which broke
-  # the old antonline-dev git-publish path (v4.1.1, 2026-06-12). Source
-  # repo Jktfe/antchat stays private; artifacts are public.
-  url "https://github.com/Jktfe/antchat-releases/releases/download/v#{version}/Antchat-#{version}.dmg"
+  # DMG lives on antonline.dev. rV1 is deployed via Vercel/object storage,
+  # not committed to the antonline-dev git repo, because the embedded server
+  # pushes the DMG past GitHub's 100MB blob limit.
+  url "https://antonline.dev/releases/antchat/v#{version}/Antchat-#{version}.dmg"
   name "Antchat"
   desc "Native desktop client for ANT rooms and agents"
   homepage "https://www.antonline.dev/"
