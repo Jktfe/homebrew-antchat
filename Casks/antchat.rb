@@ -21,8 +21,8 @@
 # Preferences/Caches paths in the zap block below.
 
 cask "antchat" do
-  version "4.1.1"
-  sha256 "1d8c344fa9359f941edb766b764b6e9548cd0a2fe460b9895d966037b40371f0"
+  version "4.1.2"
+  sha256 "21ea1d2d471417d7949f7b5461d45c4de3de761f65c387a7078e700f29788d0b"
 
   # DMG lives on antonline.dev. rV1 is deployed via Vercel/object storage,
   # not committed to the antonline-dev git repo, because the embedded server
