@@ -27,7 +27,7 @@ cask "antchat" do
   # DMG lives on antonline.dev. rV1 is deployed via Vercel/object storage,
   # not committed to the antonline-dev git repo, because the embedded server
   # pushes the DMG past GitHub's 100MB blob limit.
-  url "https://antonline.dev/releases/antchat/v#{version}/Antchat-#{version}.dmg"
+  url "https://github.com/Jktfe/antchat-releases/releases/download/v#{version}/Antchat-#{version}.dmg"
   name "Antchat"
   desc "Native desktop client for ANT rooms and agents"
   homepage "https://www.antonline.dev/"
