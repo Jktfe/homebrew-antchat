@@ -1,7 +1,7 @@
 # Homebrew Cask for the Antchat Mac app — fresh native SwiftUI build
-# from Jktfe/antchat (private SwiftUI source — DMG served via antonline.dev
-# under option B: binary public on antonline.dev, source private, license-
-# bundle gating enforced in-app at runtime).
+# from Jktfe/antchat (private SwiftUI source — DMG served via the public
+# Jktfe/antchat-releases release channel, source private, license-bundle
+# gating enforced in-app at runtime).
 #
 # Installs both the native app and the fresh `ant` CLI. The `antchat` Formula
 # is only a compatibility command so `antchat --version` matches the app
@@ -10,8 +10,7 @@
 # Release pipeline (Jktfe/antchat .github/workflows/release-dmg.yml):
 #   1. Tag `v<version>` on Jktfe/antchat.
 #   2. release-dmg.yml builds, signs, notarises, staples the DMG, then
-#      uploads the private Actions artefact to Jktfe/antonline-dev at
-#      static/downloads/antchat/Antchat-<version>.dmg.
+#      uploads the notarized DMG to Jktfe/antchat-releases.
 #   3. cask-bump.yml opens a PR against this tap bumping version + url
 #      + sha256 (computed by re-downloading the published artefact).
 #   4. User: `brew upgrade --cask antchat` → Gatekeeper accepts (notarised).
@@ -21,12 +20,11 @@
 # Preferences/Caches paths in the zap block below.
 
 cask "antchat" do
-  version "4.1.2"
-  sha256 "21ea1d2d471417d7949f7b5461d45c4de3de761f65c387a7078e700f29788d0b"
+  version "4.1.3"
+  sha256 "88b88299bdc13627e9e3427810fab4cee4b056efee8cad9fb3c8c035f8378b7f"
 
-  # DMG lives on antonline.dev. rV1 is deployed via Vercel/object storage,
-  # not committed to the antonline-dev git repo, because the embedded server
-  # pushes the DMG past GitHub's 100MB blob limit.
+  # DMG lives in the public binary-only release channel because the embedded
+  # server pushes it past GitHub's 100MB blob limit for git-tracked assets.
   url "https://github.com/Jktfe/antchat-releases/releases/download/v#{version}/Antchat-#{version}.dmg",
       verified: "github.com/Jktfe/antchat-releases/"
   name "Antchat"
