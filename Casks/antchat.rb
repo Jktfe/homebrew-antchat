@@ -25,7 +25,7 @@ cask "antchat" do
 
   # DMG lives in the public binary-only release channel because the embedded
   # server pushes it past GitHub's 100MB blob limit for git-tracked assets.
-  url "https://github.com/Jktfe/antchat-releases/releases/download/v4.1.4/Antchat-4.1.4.dmg",
+  url "https://github.com/Jktfe/antchat-releases/releases/download/v#{version}/Antchat-#{version}.dmg",
       verified: "github.com/Jktfe/antchat-releases/"
   name "Antchat"
   desc "Native desktop client for ANT rooms and agents"
