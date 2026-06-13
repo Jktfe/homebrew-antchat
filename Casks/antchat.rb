@@ -20,12 +20,12 @@
 # Preferences/Caches paths in the zap block below.
 
 cask "antchat" do
-  version "4.1.3"
-  sha256 "88b88299bdc13627e9e3427810fab4cee4b056efee8cad9fb3c8c035f8378b7f"
+  version "4.1.4"
+  sha256 "6844be4128cbf1498d1e6c3025cff218de1d53dc03c666b200ff085183b7bf15"
 
   # DMG lives in the public binary-only release channel because the embedded
   # server pushes it past GitHub's 100MB blob limit for git-tracked assets.
-  url "https://github.com/Jktfe/antchat-releases/releases/download/v#{version}/Antchat-#{version}.dmg",
+  url "https://github.com/Jktfe/antchat-releases/releases/download/v4.1.4/Antchat-4.1.4.dmg",
       verified: "github.com/Jktfe/antchat-releases/"
   name "Antchat"
   desc "Native desktop client for ANT rooms and agents"
