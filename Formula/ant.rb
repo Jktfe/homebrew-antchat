@@ -11,8 +11,8 @@ class Ant < Formula
   # predates the `connect` verb (version-stamped but pre-cutover). This
   # universal is freshly built from current main and verified to carry
   # `connect` + witness identity (2026-06-14).
-  url "https://github.com/Jktfe/antchat-releases/releases/download/ant-v#{version}/ant-#{version}-darwin-universal.tar.gz"
-  sha256 "f859f9dea8ea69c1537587d86a110eb980848142fa6061b0168c04a2efadb8e6"
+  url "https://github.com/Jktfe/antchat-releases/releases/download/ant-v0.1.14-2/ant-0.1.14-darwin-universal.tar.gz"
+  sha256 "2880025b04f78ab044ece2c9378b585c802036023c566ba41df52fc2a4cb931e"
 
   def install
     bin.install "ant"
