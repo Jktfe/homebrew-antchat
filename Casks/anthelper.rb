@@ -10,8 +10,8 @@
 # copy) fills it from the published SHA256SUMS; never hand-compute it.
 
 cask "anthelper" do
-  version "0.2.0"
-  sha256 "5548a04760ecc603f06df5ef633128631401688f4e65a54aa0857ae584870517"
+  version "0.2.1"
+  sha256 "8d5dce06c02b008251a83d4868f530333daf9308992e67b454ad07329750e2d1"
 
   url "https://antonline.dev/releases/anthelper/v#{version}/AntHelper-#{version}.dmg"
   name "ANT Helper"
