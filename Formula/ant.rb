@@ -6,17 +6,13 @@ class Ant < Formula
 
   depends_on :macos
 
-  on_macos do
-    on_arm do
-      url "https://github.com/Jktfe/a-nice-terminal/releases/download/ant-v#{version}/ant-#{version}-darwin-arm64.tar.gz"
-      sha256 "15913486674919faee0265f02a169880b7545dc8d34792af68d4729f1034e4af"
-    end
-
-    on_intel do
-      url "https://github.com/Jktfe/a-nice-terminal/releases/download/ant-v#{version}/ant-#{version}-darwin-x64.tar.gz"
-      sha256 "31d65ebfb352483b67f06a2eb2a548a1a3a7d0368cf2107e05bcf840af32442a"
-    end
-  end
+  # Universal (arm64+x86_64) tarball on the PUBLIC antchat-releases repo.
+  # The per-arch a-nice-terminal ant-v0.1.14 assets were a stale 0.1.14 that
+  # predates the `connect` verb (version-stamped but pre-cutover). This
+  # universal is freshly built from current main and verified to carry
+  # `connect` + witness identity (2026-06-14).
+  url "https://github.com/Jktfe/antchat-releases/releases/download/ant-v#{version}/ant-#{version}-darwin-universal.tar.gz"
+  sha256 "f859f9dea8ea69c1537587d86a110eb980848142fa6061b0168c04a2efadb8e6"
 
   def install
     bin.install "ant"
