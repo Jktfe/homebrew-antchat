@@ -20,8 +20,8 @@
 # Preferences/Caches paths in the zap block below.
 
 cask "antchat" do
-  version "4.1.19"
-  sha256 "e0297791f5ab5208beb480c91f1ced3b6b415fed2147c3f1ef8ed3a6c8e44a1d"
+  version "4.1.20"
+  sha256 "e7d8e796169995b6eb3aff8c9ca9f163d8cff7ecdb4dd7a1221c90d338637969"
 
   # DMG lives in the public binary-only release channel because the embedded
   # server pushes it past GitHub's 100MB blob limit for git-tracked assets.
