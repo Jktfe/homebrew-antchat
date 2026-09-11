@@ -1,9 +1,9 @@
 class Antcli < Formula
   desc "ossANT headless CLI for Desks, rooms, plans, and agent routing"
   homepage "https://github.com/Jktfe/antOSS"
-  url "https://github.com/Jktfe/antchat-releases/releases/download/antcli-v0.1.3/antcli-0.1.3-darwin-universal.tar.gz"
-  sha256 "56a13b09545572ecd63e069d648fbf1f4de3eae86d02489ea4488a25ac378f9d"
-  version "0.1.3"
+  url "https://github.com/Jktfe/antchat-releases/releases/download/antcli-v0.1.4/antcli-0.1.4-darwin-universal.tar.gz"
+  sha256 "fdfbeb311a3f8e86b0ff3ebe9ed20223a6bf2c85e8c997c624b26bb624a0c176"
+  version "0.1.4"
 
   # No license field: ossANT ships proprietary / all-rights-reserved by default (James's ruling
   # 2026-07-17). The Apache-2.0 flip is a later, deliberate open-core act — do NOT add an open licence
@@ -28,6 +28,6 @@ class Antcli < Formula
   end
 
   test do
-    assert_equal "0.1.2", shell_output("#{bin}/antcli --version").strip
+    assert_equal "0.1.4", shell_output("#{bin}/antcli --version").strip
   end
 end
