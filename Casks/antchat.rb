@@ -20,8 +20,8 @@
 # Preferences/Caches paths in the zap block below.
 
 cask "antchat" do
-  version "4.1.21"
-  sha256 "9f7e9b75e01781414005725b28475ab39fd6a4561532fc4fab5bc7d14e214c5a"
+  version "4.2.0"
+  sha256 "736826197e6dfe903c8621c431f2ac684b5ddd96891a6857c6281f60bcb3156f"
 
   # DMG lives in the public binary-only release channel because the embedded
   # server pushes it past GitHub's 100MB blob limit for git-tracked assets.
@@ -37,7 +37,8 @@ cask "antchat" do
 
   # Fresh SwiftUI native build targets macOS 14+ (Sonoma).
   depends_on macos: :sonoma
-  depends_on formula: "jktfe/antchat/ant"
+  depends_on formula: "jq"
+  depends_on formula: "tmux"
 
   app "Antchat.app"
 
@@ -45,8 +46,6 @@ cask "antchat" do
   # Bundle ID = vc.newmodel.antchat (NOT vc.newmodel.ant.chat which was the
   # antios Catalyst dev artefact's id — distinct paths).
   zap trash: [
-    "~/.ant/account",
-    "~/.ant/active-workspace.json",
     "~/Library/Application Support/Antchat",
     "~/Library/Caches/vc.newmodel.antchat",
     "~/Library/Preferences/vc.newmodel.antchat.plist",
@@ -54,9 +53,7 @@ cask "antchat" do
   ]
 
   caveats <<~EOS
-    The fresh ANT CLI is installed by the `ant` formula as:
-      ant
-
-    The `antchat` command is a compatibility wrapper for the Mac app version.
+    Open Antchat and pair this Mac with your ANT home server.
+    The app bundles its satellite runtime and CLI. tmux and jq are installed as dependencies.
   EOS
 end
